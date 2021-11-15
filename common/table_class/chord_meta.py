@@ -22,7 +22,7 @@ class Table_Chord_Meta(Base):  # 继承生成的orm基类
     example = Column(TEXT)
     note_num = Column(INT)
     interval_prefix_list = Column(TEXT)
-
+    sus = Column(INT)
     move5 = Column(INT)
     move9 = Column(INT)
     move11 = Column(INT)
