@@ -37,8 +37,8 @@ def execute(base_note_uid: [int, str], base_note_octave, chord_term: str):
             notes_list.append(0)
     the_return["chord_list"] = notes_list
     the_return["chord_base_term"] = getattr(result, "chord_base_term")
-    the_return["description"] = getattr(result, "description")
-    the_return["note_num"] = getattr(result, "note_num")
+    # the_return["description"] = getattr(result, "description")
+    # the_return["note_num"] = getattr(result, "note_num")
     the_return["move5"] = getattr(result, "move5")
     the_return["move9"] = getattr(result, "move9")
     the_return["move11"] = getattr(result, "move11")
@@ -49,9 +49,10 @@ def execute(base_note_uid: [int, str], base_note_octave, chord_term: str):
     the_return["is_add9"] = getattr(result, "is_add9")
     the_return["is_add11"] = getattr(result, "is_add11")
     the_return["is_add13"] = getattr(result, "is_add13")
+    the_return["sus"] = getattr(result, "sus")
     return the_return
 
 
 if __name__ == '__main__':
-    a = execute(1, 5, "dom13-9")
+    a = execute(1, 5, "sus2")
     print(a)

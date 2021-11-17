@@ -14,10 +14,19 @@ from common.settings import CENTER_C_LOCATION
 class Chord(object):
     def __init__(self, root_note_uid_or_math_name: [str, int] = 1, root_note_octave=CENTER_C_LOCATION,
                  chord_term_list: [str, list[str]] = "maj3"):
-        self.is_valid = False
-        from chord.when_init import init_process
-        init_process(root_note_uid_or_math_name, root_note_octave, chord_term_list)
-        self.non = None
+        from chord import when_init
+        when_init.init_process(root_note_uid_or_math_name, root_note_octave, chord_term_list)
+        self.is_valid = when_init.is_valid
+        self.chord_base_list = when_init.chord_base_list
+        self.chord_base_term = when_init.chord_base_term
+        self.adjust_info = when_init.adjust_info
+
+    def set_adjust(self, adjust_list: list):
+        from chord.when_init.decode_ajust import decode
+        self.adjust_info = decode(adjust_list, self.adjust_info)
+        return self
+
+
 
     @property
     def score_term(self):
@@ -37,5 +46,8 @@ def notes_list_to_chord(chord_list: list[Note]):
 
 
 if __name__ == '__main__':
-    a = Chord()
+    a = Chord(1, 5, "half_dim7")
+    a.adjust_info.add(2).add(4)
+    print(a.chord_base_list)
+    print(a.adjust_info)
     print(a)
