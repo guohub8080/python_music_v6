@@ -34,17 +34,17 @@ def init_process(root_note_uid_or_math_name=1, root_note_octave=CENTER_C_LOCATIO
         if base_chord_dict["move13"]:
             adjust_info.move(13, base_chord_dict["move13"])
         if base_chord_dict["is_add2"]:
-            adjust_info.add(True)
+            adjust_info.add(2)
         if base_chord_dict["is_add4"]:
-            adjust_info.add(True)
+            adjust_info.add(4)
         if base_chord_dict["is_add6"]:
-            adjust_info.add(True)
+            adjust_info.add(6)
         if base_chord_dict["is_add9"]:
-            adjust_info.add(True)
+            adjust_info.add(9)
         if base_chord_dict["is_add11"]:
-            adjust_info.add(True)
+            adjust_info.add(11)
         if base_chord_dict["is_add13"]:
-            adjust_info.add(True)
+            adjust_info.add(13)
         if base_chord_dict["sus"]:
             adjust_info.sus(base_chord_dict["sus"])
 

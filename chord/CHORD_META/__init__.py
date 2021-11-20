@@ -26,54 +26,69 @@ min9 = "m9"
 
 class Adjust_Chord(object):
     def __init__(self):
-        self._adjust_add = [False for i in range(13)]
-        self._adjust_move = [0 for i in range(13)]
-        self._adjust_omit = [False for i in range(13)]
-        self._adjust_sus = 0
-        self._inversion_uid = 0
-        self._inversion_type = 0
+        self.adjust_add = [False for i in range(13)]
+        self.adjust_move = [0 for i in range(13)]
+        self.adjust_omit = [False for i in range(13)]
+        self.adjust_sus = 0
+        self.inversion_uid = 0
+        self.inversion_type = 0
+
+    def make_up(self):
+        from chord.CHORD_META.deal_chord_change import deal
+        the_list = deal(add_list=self.adjust_add, move_list=self.adjust_move, omit_list=self.adjust_omit)
+        self.adjust_add = the_list[0]
+        self.adjust_move = the_list[1]
+        self.adjust_omit = the_list[2]
 
     def add(self, add_note_interval: int):
-        self._adjust_add[add_note_interval - 1] = True
+        self.adjust_add[add_note_interval - 1] = True
         return self
 
     def move(self, move_note_interval: int, move_semitone: int):
-        self._adjust_move[move_note_interval - 1] += move_semitone
+        self.adjust_move[move_note_interval - 1] += move_semitone
         return self
 
     def move_to(self, move_note_interval: int, move_target: int):
-        self._adjust_move[move_note_interval - 1] = move_target
+        self.adjust_move[move_note_interval - 1] = move_target
         return self
 
     def omit(self, omit_note_interval: int):
-        self._adjust_omit[omit_note_interval - 1] = True
+        self.adjust_omit[omit_note_interval - 1] = True
         return self
 
     def sus(self, sus_num=2):
-        self._adjust_sus = sus_num
+        self.adjust_sus = sus_num
         return self
 
     def inversion_on_uid(self, inversion_uid: int):
-        self._inversion_uid = inversion_uid
+        self.inversion_uid = inversion_uid
         return self
 
     def inversion_on_math_name(self, math_name: str):
         from note import Note
-        self._inversion_uid = Note(math_name).uid
+        self.inversion_uid = Note(math_name).uid
         return self
 
-    def inversion_on_index(self, inversion_index: int):
-        self._inversion_type = inversion_index
+    def inversion_ordinal(self, inversion_index: int):
+        self.inversion_type = inversion_index
         return self
 
     def __str__(self):
-        print([u for u in self._adjust_move])
-        print([u for u in self._adjust_add])
-        print([u for u in self._adjust_omit])
-        print("sus:", self._adjust_sus)
-        print(self._inversion_uid)
-        print(self._inversion_type)
+        print([u for u in self.adjust_move])
+        print([u for u in self.adjust_add])
+        print([u for u in self.adjust_omit])
+        print("sus:", self.adjust_sus)
+        print(self.inversion_uid)
+        print(self.inversion_type)
         return ""
+
+    # @property
+    # def adjust_add(self):
+    #     return self.adjust_add
+
+    # @adjust_add.setter
+    # def adjust_add(self, value):
+    #     self._adjust_add = value
 
 
 if __name__ == '__main__':

@@ -19,26 +19,14 @@ def execute(base_note_uid: [int, str], base_note_octave, chord_term: str):
         if not base_note_uid:
             return None
     the_return = {
-        "chord_list": None
+        "chord_list": None,
+        "chord_base_term": None
     }
     result = session.query(Table_Chord_Meta).filter(Table_Chord_Meta.chord_full_term == chord_term).one_or_none()
     if not result:
         return None
-    the_interval_prefix_list = trans_str_to_list(getattr(result, "interval_prefix_list"))
-    notes_list = [Note(base_note_uid, base_note_octave)]
-    for v, i in enumerate(the_interval_prefix_list, 2):
-        if i:
-            temp_note_instance = notes_list[0].get_note_by_interval(i, v)
-            if temp_note_instance.is_valid:
-                notes_list.append(temp_note_instance)
-            else:
-                return None
-        else:
-            notes_list.append(0)
-    the_return["chord_list"] = notes_list
+
     the_return["chord_base_term"] = getattr(result, "chord_base_term")
-    # the_return["description"] = getattr(result, "description")
-    # the_return["note_num"] = getattr(result, "note_num")
     the_return["move5"] = getattr(result, "move5")
     the_return["move9"] = getattr(result, "move9")
     the_return["move11"] = getattr(result, "move11")
@@ -50,6 +38,23 @@ def execute(base_note_uid: [int, str], base_note_octave, chord_term: str):
     the_return["is_add11"] = getattr(result, "is_add11")
     the_return["is_add13"] = getattr(result, "is_add13")
     the_return["sus"] = getattr(result, "sus")
+    the_interval_prefix_list = None
+    if getattr(result, "chord_base_term") == getattr(result, "chord_full_term"):
+        the_interval_prefix_list = trans_str_to_list(getattr(result, "interval_prefix_list"))
+    else:
+        the_interval_prefix_list = trans_str_to_list(getattr(session.query(Table_Chord_Meta).filter(
+            Table_Chord_Meta.chord_full_term == the_return["chord_base_term"]).one_or_none(), "interval_prefix_list"))
+    notes_list = [Note(base_note_uid, base_note_octave)]
+    for v, i in enumerate(the_interval_prefix_list, 2):
+        if i:
+            temp_note_instance = notes_list[0].get_note_by_interval(i, v)
+            if temp_note_instance.is_valid:
+                notes_list.append(temp_note_instance)
+            else:
+                return None
+        else:
+            notes_list.append(0)
+    the_return["chord_list"] = notes_list
     return the_return
 
 

@@ -105,7 +105,7 @@ def decode(adjust_list: list, adjust_info: Adjust_Chord):
 
             elif each_adjust[:4].lower() == "num/":
                 if each_adjust[4:].isdigit():
-                    adjust_info.inversion_on_index(int(each_adjust[4:]))
+                    adjust_info.inversion_ordinal(int(each_adjust[4:]))
             elif each_adjust[:4].lower() == "uid/":
                 if each_adjust[4:].isdigit():
                     adjust_info.inversion_on_uid(int(each_adjust[4:]))
