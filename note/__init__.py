@@ -81,13 +81,11 @@ class Note(object):
         from note.common_interval_presets import Common_Interval
         return Common_Interval(self, inverse_query=True)
 
-    # 和弦查询：引入一个其他的类
-    @property
-    def chord(self):
-        from common.chord_old import Chord
-        return Chord(self)
+    def make_chord(self, chord_str_or_list):
+        from chord import Chord
+        return Chord(self.uid, self.octave, chord_str_or_list)
+        # 八度调整的函数：
 
-    # 八度调整的函数：
     def octave_shift(self, octave_shift_value=0):
         assert isinstance(octave_shift_value, int)
         if octave_shift_value:

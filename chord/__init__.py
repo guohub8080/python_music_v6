@@ -72,7 +72,7 @@ class Chord(object):
 
     def __str__(self):
         if self.is_valid:
-            print(f"和弦{self.score_term}:", end="  ")
+            print(f"和弦{self.score_term}:", end=" ")
             the_str = ""
             for i in range(len(self.chord_content)):
                 the_str = the_str.__add__(f"{self.chord_content[i].art_name}_{self.chord_content[i].octave}")
@@ -84,12 +84,14 @@ class Chord(object):
         return ""
 
 
-def notes_list_to_chord(chord_list: list[Note]):
-    return
+def detect_notes_to_chord(chord_list: list[0, Note]):
+    from chord.chord_detector import detector
+    return detector(chord_list)
 
 
 if __name__ == '__main__':
-    a = Chord(1, 5, "maj3")
+    a = Chord(1, 5, "maj69")
+    a.adjust_info.inversion_type = 1
     # a.adjust_info.add(2).add(4).sus(2).move(5, 1).add(9).move(11, -1)
     # print(a.adjust_info.adjust_move)
     # [print(i.art_name, i.octave) for i in a.chord_content]

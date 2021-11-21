@@ -4,12 +4,12 @@
 
 
 def execute(tonic_uid, tonic_octave, scale_term_or_id: [int, str]):
-    from scale import Scale
+    from common.scale_old import Scale
     if isinstance(scale_term_or_id, str):
         return Scale(tonic_uid, tonic_octave, scale_term_or_id)
 
     from sqlalchemy import create_engine
-    from common.table_class.scale_meta import Table_Scale_Meta
+    from common.table_class.scale_meta_old import Table_Scale_Meta
     from sqlalchemy.orm import sessionmaker
 
     from common.settings import DB_SQL_LOCATION

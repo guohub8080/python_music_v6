@@ -3,15 +3,12 @@
 # @Author  : guo2018@88.com
 
 from note import Note
-from sqlalchemy.orm import aliased
 
 from common.settings import DB_SQL_LOCATION
 from sqlalchemy import create_engine
 
 from common.table_class.meta import Table_Meta
 from common.table_class.chord_meta import Table_Chord_Meta
-from common.table_class.chord import Table_Chord
-from common.table_class.chord_old import Table_Chord3
 from sqlalchemy.orm import sessionmaker
 
 engine = create_engine(DB_SQL_LOCATION)

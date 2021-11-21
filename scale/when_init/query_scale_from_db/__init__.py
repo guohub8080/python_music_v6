@@ -4,7 +4,7 @@
 from sqlalchemy import create_engine
 from note import Note
 from common.table_class.scale import Table_Scale
-from common.table_class.scale_meta import Table_Scale_Meta
+from common.table_class.scale_meta_old import Table_Scale_Meta
 from sqlalchemy.orm import sessionmaker
 
 from common.settings import DB_SQL_LOCATION

@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 # @Time    : 2021/11/5 11:07 下午
 # @Author  : guo2018@88.com
-from scale import Scale
+from common.scale_old import Scale
 from produce_score import Score, Part
-from note import Note, Rest_Note
+from note import Rest_Note
 import random
-from produce_score.function_tool.random_tool import random_list_with_weight
-from produce_score.function_tool.produce_score_elements import produce_note
 
 a_scale = Scale(8,4,"AEO")
 print(a_scale)
@@ -37,7 +35,7 @@ def make_random_notes(rest_prob, notes_list, quarter_length, octave):
 
 # 随机生成和弦：
 def make_random_chords(quarter_length):
-    from random import random, randint
+    from random import randint
     from produce_score.function_tool.produce_score_elements import produce_column_chord
     the = produce_column_chord([x.octave_shift(0) for x in a_scale.scale_degree_chord7(randint(1, 6))], i)
     the.quarterLength = quarter_length

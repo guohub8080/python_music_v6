@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-# @Time    : 2021/11/3 7:04 下午
+# @Time    : 2021/11/20 10:16 下午
 # @Author  : guo2018@88.com
+
 from common.settings import CENTER_C_LOCATION
 from note import Note
 
@@ -33,12 +34,12 @@ class Scale(object):
 
     # 三级和弦级数：
     def scale_degree_chord3(self, degree_int):
-        from scale.find_scale_degree import find_degree3
+        from common.scale_old.find_scale_degree import find_degree3
         return find_degree3(degree_int, self.scale_list)
 
     # 七级和弦级数：
     def scale_degree_chord7(self, degree_int):
-        from scale.find_scale_degree import find_degree7
+        from common.scale_old.find_scale_degree import find_degree7
         return find_degree7(degree_int, self.scale_list)
 
     def __str__(self):

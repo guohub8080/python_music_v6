@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # @Time    : 2021/11/5 4:04 下午
 # @Author  : guo2018@88.com
-from note import Note
 
 is_valid = False
 scale_name = None
@@ -17,7 +16,7 @@ scale_description = None
 
 
 def get_info(input_tonic_uid, input_tonic_octave, scale_term):
-    from scale.when_init import query_scale_from_db
+    from common.scale_old.when_init import query_scale_from_db
     content_result = query_scale_from_db.query_scale_content(input_tonic_uid, input_tonic_octave, scale_term)
     if not content_result:
         return None
