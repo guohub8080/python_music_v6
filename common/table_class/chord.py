@@ -24,7 +24,7 @@ class Table_Chord(Base):  # 继承生成的orm基类
     notes_uid_list = Column(TEXT)
     notes_loc_id_list = Column(TEXT)
     notes_clock_list = Column(TEXT)
-    notes_octave_list = Column(TEXT)
+    # notes_octave_list = Column(TEXT)
     notes_math_name_list = Column(TEXT)
 
     note_num = Column(INT)

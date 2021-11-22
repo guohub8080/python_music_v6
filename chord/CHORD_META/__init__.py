@@ -33,13 +33,6 @@ class Adjust_Chord(object):
         self.inversion_uid = 0
         self.inversion_type = 0
 
-    def make_up(self):
-        from chord.CHORD_META.deal_chord_change import deal
-        the_list = deal(add_list=self.adjust_add, move_list=self.adjust_move, omit_list=self.adjust_omit)
-        self.adjust_add = the_list[0]
-        self.adjust_move = the_list[1]
-        self.adjust_omit = the_list[2]
-
     def add(self, add_note_interval: int):
         self.adjust_add[add_note_interval - 1] = True
         return self

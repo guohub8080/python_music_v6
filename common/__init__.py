@@ -16,6 +16,11 @@ def interval_between_notes(note1, note2):
     return execute(note1, note2)
 
 
+# 把全部列表转成无空格的字符串：
+def trans_to_str(input_value):
+    return str(input_value).replace("'", "").replace(" ", "").replace("[", "").replace("]", "")
+
+
 # 将数据库里面的列表类型的字符串转成列表：
 def trans_str_to_list(input_str):
     from common.utils.trans_to_list import execute

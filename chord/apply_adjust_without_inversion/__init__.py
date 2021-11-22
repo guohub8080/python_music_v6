@@ -1,12 +1,16 @@
 #!/usr/bin/env python
 # @Time    : 2021/11/15 10:19 下午
 # @Author  : guo2018@88.com
-from note import Note
+from copy import deepcopy, copy
+
 from chord.CHORD_META import Adjust_Chord
+from note import Note
 
 
 def apply(origin_list: list[0, Note], adjust_info: Adjust_Chord):
-    root_note_instance: Note = origin_list[0]
+    root_note_instance: Note = deepcopy(origin_list[0])
+    adjust_info = deepcopy(adjust_info)
+    # adjust_info = copy(adjust_info)
     # 先来处理sus：
     if adjust_info.adjust_sus == 2:
         adjust_info.adjust_omit[2] = True

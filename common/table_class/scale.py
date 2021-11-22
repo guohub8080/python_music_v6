@@ -18,12 +18,15 @@ class Table_Scale(Base):  # 继承生成的orm基类
     is_trans = Column(BOOLEAN)
 
     scale_term = Column(TEXT(10))
-    is_valid = Column(BOOLEAN)
+    # is_valid = Column(BOOLEAN)
     note_num = Column(INT)
+    sharp_flat_num = Column(INT)
 
     uid_list = Column(TEXT)
     octave_list = Column(TEXT)
     math_name_list = Column(TEXT)
+
+
 if __name__ == '__main__':
     input("请注意，即将创建表，不要轻易确定1。")
     input("请注意，即将创建表，不要轻易确定2。")

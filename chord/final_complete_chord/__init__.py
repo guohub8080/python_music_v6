@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # @Time    : 2021/11/19 11:27 下午
 # @Author  : guo2018@88.com
+from copy import deepcopy
+
 from note import Note
 
 
 def show_final(chord_complete_list_without_inversion, inversion_uid, inversion_type, additional_notes):
-    chord_list = sorted([i for i in chord_complete_list_without_inversion if i], key=lambda x: x.semitone)
+    chord_list = deepcopy(sorted([i for i in chord_complete_list_without_inversion if i], key=lambda x: x.semitone))
     if inversion_uid and not inversion_type:
         flag = -1
         for i in chord_list:
@@ -35,5 +37,4 @@ def show_final(chord_complete_list_without_inversion, inversion_uid, inversion_t
 if __name__ == '__main__':
     list1 = [Note("C"), 0, Note("E"), 0, Note("G")]
     print()
-    [print(i.math_name,i.octave) for i in show_final(list1, 3, 0, [])]
-
+    [print(i.math_name, i.octave) for i in show_final(list1, 3, 0, [])]

@@ -10,8 +10,8 @@ Base = declarative_base()  # 生成orm基类
 
 class Table_Scale_Meta(Base):  # 继承生成的orm基类
     __tablename__ = "scale_meta"  # 表名
-    # id = Column(INT)  # 设置主键
-    scale_term = Column(TEXT(10), primary_key=True)
+    scale_term = Column(TEXT(10), primary_key=True)  # 设置主键
+    id = Column(INT)
     scale_name = Column(TEXT(50))
     scale_description = Column(TEXT(50))
     prefix_list = Column(TEXT)

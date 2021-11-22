@@ -35,10 +35,9 @@ for each_note_uid in full_normal_uids:
             return str(lsit).replace("'", "").replace(" ", "").replace("[", "").replace("]", "")
 
 
-        uid_list = trans_to_str([i.uid for i in chord_render])
-        loc_id_list = trans_to_str([i.loc_id for i in chord_render])
-        clock_list = trans_to_str([i.clock_instance.mapping_time.minute for i in chord_render])
-        octave_list = trans_to_str([i.octave - CENTER_C_LOCATION for i in chord_render])
+        uid_list = trans_to_str(sorted([i.uid for i in chord_render]))
+        loc_id_list = trans_to_str(sorted([i.loc_id for i in chord_render]))
+        clock_list = trans_to_str(sorted([i.clock_instance.mapping_time.minute for i in chord_render]))
         math_name_list = trans_to_str([i.math_name for i in chord_render])
         new_add = Table_Chord(
             root_note_uid=base_note.uid,
@@ -51,7 +50,7 @@ for each_note_uid in full_normal_uids:
             notes_uid_list=uid_list,
             notes_loc_id_list=loc_id_list,
             notes_clock_list=clock_list,
-            notes_octave_list=octave_list,
+            # notes_octave_list=octave_list,
             notes_math_name_list=math_name_list
         )
         session.add(new_add)

@@ -11,7 +11,7 @@ is_valid = False
 chord_base_list = None
 chord_base_term = None
 
-adjust_info = Adjust_Chord()
+adjust_info = None
 
 
 def init_process(root_note_uid_or_math_name=1, root_note_octave=CENTER_C_LOCATION,
@@ -23,6 +23,7 @@ def init_process(root_note_uid_or_math_name=1, root_note_octave=CENTER_C_LOCATIO
     base_chord_dict = find_1_chord.execute(root_note_uid_or_math_name, root_note_octave, chord_term_list[0])
     if base_chord_dict:
         global chord_base_list, chord_base_term, adjust_info, is_valid
+        adjust_info = Adjust_Chord()
         chord_base_list = base_chord_dict["chord_list"]
         chord_base_term = base_chord_dict["chord_base_term"]
         if base_chord_dict["move5"]:
@@ -63,4 +64,4 @@ if __name__ == '__main__':
     # print(a.sharp_or_flat_adjust(3))
     print(adjust_info)
     print(chord_base_term)
-    [print(i.math_name, i.octave) for i in chord_base_list if i]
+

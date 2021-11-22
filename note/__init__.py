@@ -118,7 +118,13 @@ class Note(object):
         from note.find_scale import execute
         return execute(self.uid, self.octave, scale_id_or_term)
 
-    # 设置输出字符
+    # 判断一个音是否在一个音阶里：
+    def is_in_scale(self, scale_instance):
+        from note.judge_in_scale import execute
+        return execute(self.uid, scale_instance)
+
+        # 设置输出字符
+
     def __str__(self):
         the_sen = "The Note is not valid."
         if self.is_valid:
@@ -143,8 +149,14 @@ if __name__ == '__main__':
     b = Note("d+1")
     c = b.scale(7)
     print(c)
-    # print(a)
-    # print(b)
+    from scale import Scale
+
+    d = Scale()
+    print(a.is_in_scale(d))
+    e = a.make_chord(["maj3", "+5"])
+    # print(e)
+    print(e)
+
     # print(a.interval.P5.interval.P5.interval.P5.interval.P5)
     # # from PRESETS import C_FLAT_5, D_6
     # #
