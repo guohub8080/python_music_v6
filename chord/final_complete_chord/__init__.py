@@ -10,10 +10,11 @@ def show_final(chord_complete_list_without_inversion, inversion_uid, inversion_t
     chord_list = deepcopy(sorted([i for i in chord_complete_list_without_inversion if i], key=lambda x: x.semitone))
     if inversion_uid and not inversion_type:
         flag = -1
-        for i in chord_list:
-            if i.uid == inversion_uid:
-                flag = chord_list.index(i)
-                break
+        for v, i in enumerate(chord_list):
+            if v > 0:
+                if i.uid == inversion_uid:
+                    flag = chord_list.index(i)
+                    break
         if flag > -1:
             for i in range(len(chord_list)):
                 if i < flag:
@@ -24,9 +25,13 @@ def show_final(chord_complete_list_without_inversion, inversion_uid, inversion_t
                 the_most_low_note = the_most_low_note.octave_shift(-1)
             chord_list.append(the_most_low_note)
     elif inversion_type and not inversion_uid:
-        for i in range(len(chord_list)):
-            if i <= inversion_type:
-                chord_list[i] = chord_list[i].octave_shift(1)
+        # inversion_times = inversion_type % len(chord_list)
+        # # print(inversion_times)
+        # if inversion_times != 0:
+        for i in range(inversion_type):
+            chord_list[i] = chord_list[i].octave_shift(1)
+        # elif inversion_times == 0:
+        #     pass
     elif inversion_type and inversion_uid:
         raise TypeError("转位和弦名称和第几转位不能共存！")
     chord_list.extend(additional_notes)

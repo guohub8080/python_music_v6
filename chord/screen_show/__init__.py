@@ -5,7 +5,7 @@ from note import Note
 
 
 def execute(score_term, chord_content: list[Note]):
-    a = f"和弦{score_term}:"
+    a = f"和弦[ {score_term} ]构成音为："
     the_str = ""
     # print(self.chord_content)
     # asdasd = [i.math_name for i in self.chord_content]

@@ -7,7 +7,9 @@ from note import Note
 
 
 class Scale(object):
-    def __init__(self, tonic_uid=1, tonic_octave=CENTER_C_LOCATION, scale_term="ION"):
+    def __init__(self, tonic_uid: [int, str, None] = None, tonic_octave=CENTER_C_LOCATION, scale_term="ION"):
+        if not tonic_uid:
+            tonic_uid = 1
         # 输入的根音：
         self.input_tonic_instance = Note(tonic_uid, tonic_octave)
         self._scale_term = scale_term
@@ -15,18 +17,40 @@ class Scale(object):
         when_init.get_info(tonic_uid, tonic_octave, scale_term)
 
         # 实际的根音：
-        self.scale_name = when_init.scale_name
-        self.scale_description = when_init.scale_description
+        self._scale_name = when_init.scale_name
+        self._scale_description = when_init.scale_description
         self.tonic_note = when_init.tonic_note
 
         self.is_trans = when_init.is_trans
         self.key_signature = when_init.key_signature
-        self.scale_list = when_init.scale_list
+        self._scale_list = when_init.scale_list
+
+    @property
+    def scale_description(self):
+        return self._scale_description
+
+    @property
+    def scale_name(self):
+        return self._scale_name
+
+    @property
+    def scale_list(self):
+        return self._scale_list
 
     def octave_shift(self, shift_int=0):
         if shift_int:
             return Scale(self.tonic_note.uid, self.tonic_note.octave + shift_int, self._scale_term)
         return self
+
+    # 直接找到调内三和弦：
+    def degree_chord3(self, rank_int: int):
+        from scale.find_degree_chord import find_degree3
+        return find_degree3(self.scale_list, rank_int)
+
+    # 直接找到调内七和弦：
+    def degree_chord7(self, rank_int: int):
+        from scale.find_degree_chord import find_degree7
+        return find_degree7(self.scale_list, rank_int)
 
     def __str__(self):
         signature_words = "升"
@@ -46,6 +70,21 @@ class Scale(object):
         return ""
 
 
+# 自定义音阶（待开发使用）：
+# class Customize_Scale(Scale):
+#     def __init__(self, tonic_uid: [int, str, None] = None, tonic_octave=CENTER_C_LOCATION, base_scale_term="ION"):
+#         super(Customize_Scale, self).__init__(tonic_uid, tonic_octave, base_scale_term)
+#
+#     @property
+#     def scale_list(self):
+#         return ":"
+#
+#     def __str__(self):
+#         return "hehe"
+
+
 if __name__ == '__main__':
-    a = Scale(16, 5, "ION")
-    print(a)
+    a = Scale(1, 5, "ION")
+    # print(a.scale_list)
+    # print(a.degree_chord3(7))
+    print(a.degree_chord7(3))

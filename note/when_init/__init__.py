@@ -27,9 +27,9 @@ def get_info(name):
         from note.when_init.query_meta import get_by_uid
         info_pack = get_by_uid(name)
 
+    global uid, math_name, art_name, index, bias, is_black, loc_id, semitone, is_valid, is_normal
     if info_pack:
         # print(key_list)
-        global uid, math_name, art_name, index, bias, is_black, loc_id, semitone, is_valid, is_normal
         uid = getattr(info_pack, "uid")
         art_name = getattr(info_pack, "art_name")
         math_name = getattr(info_pack, "math_name")
@@ -40,7 +40,19 @@ def get_info(name):
         semitone = getattr(info_pack, "semitone")
         is_normal = getattr(info_pack, "is_normal")
         is_valid = True
-        return
+        return None
+    else:
+        uid = None
+        math_name = None
+        art_name = None
+        index = None
+        bias = None
+        is_black = False
+        loc_id = None
+        semitone = None
+        is_valid = False
+        is_normal = False
+
     return None
 
 

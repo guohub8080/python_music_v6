@@ -6,7 +6,7 @@ from note import Note
 
 
 def show(root_note_art_name: str, chord_base_term: str, adjust_info: Adjust_Chord, additional_notes: list[Note],
-         most_low_note_name: str):
+         most_low_note_name: str, notes_length: int):
     chord_term = ""
     if chord_base_term == "maj3":
         pass
@@ -95,7 +95,8 @@ def show(root_note_art_name: str, chord_base_term: str, adjust_info: Adjust_Chor
     if adjust_info.inversion_uid:
         final_term = final_term.__add__("/").__add__(Note(adjust_info.inversion_uid).art_name)
     elif adjust_info.inversion_type:
-        final_term = final_term.__add__("/").__add__(most_low_note_name)
+        if adjust_info.inversion_type % notes_length:
+            final_term = final_term.__add__("/").__add__(most_low_note_name)
 
     if additional_notes:
         final_term.__add__(f"(add {','.join([i.art_name for i in additional_notes])})")
